@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  mariadb:
+    build: ./requirements/mariadb/
+    image: mariadb
+    container_name: mariadb
+  nginx:
+    build: ./requirements/nginx/
+    image: nginx
+    container_name: nginx
+    ports:
+      - 7780:80
+      - 443:443
+    restart: always
+    networks:
+      - vikka
+  wordpress:
+    build: ./requirements/wordpress/
+    image: wordpress
+    container_name: wordpress
+    tty: true
+    networks:
+      - vikka
+
+networks:
+  vikka:
+    driver: bridge 
+  artur:
+    driver: bridge
+
