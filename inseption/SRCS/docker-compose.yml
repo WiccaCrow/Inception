@@ -4,21 +4,24 @@ services:
     build: ./requirements/mariadb/
     image: mariadb
     container_name: mariadb
+    restart: on-failure
   nginx:
     build: ./requirements/nginx/
     image: nginx
     container_name: nginx
+    init: true
     ports:
       - 7780:80
       - 443:443
-    restart: always
+    restart: on-failure
     networks:
       - vikka
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress
     container_name: wordpress
-    tty: true
+    init: true
+    restart: on-failure
     networks:
       - vikka
 
