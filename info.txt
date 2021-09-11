@@ -126,7 +126,32 @@ https://nginx.org/ru/docs/beginners_guide.html
 ______________________________________________________________
 MYSQL
 https://tproger.ru/translations/sql-recap/
+
+http://www.mysql.ru/docs/man/Adding_users.html
+
+https://dev.mysql.com/doc/refman/8.0/en/resetting-permissions.html
+
+https://superuser.com/questions/629709/how-to-exit-mysql-command-prompt/863075
+
+
+Флаг порт
+http://dba.fyicenter.com/faq/mysql/mysqld-Command-Line-Option.html
+
+Получить список таблиц в пользовательских БД в SQL Server
+https://ru.stackoverflow.com/questions/19340/%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C-%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86-%D0%B2-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D0%BA%D0%B8%D1%85-%D0%91%D0%94-%D0%B2-sql-server
 ______________________________________________________________
+Mariadb
+
+https://mariadb.com/kb/en/configuring-mariadb-with-option-files/
+
+https://mariadb.com/kb/en/mysql-command-line-client/
+
+https://www.ibm.com/docs/en/spectrum-lsf-rtm/10.2.0?topic=ssl-configuring-default-root-password-mysqlmariadb
+
+https://russianblogs.com/article/71831510312/
 ______________________________________________________________
+Темы для оформления сайтов
+
+https://codepen.io/
 ______________________________________________________________
 
