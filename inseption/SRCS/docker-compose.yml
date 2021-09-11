@@ -9,11 +9,15 @@ services:
     tty: true
     volumes:
       - db:/var/lib/mysql
+    networks:
+      - vikka
   nginx:
     build: ./requirements/nginx/
     image: nginx
     container_name: nginx
     init: true
+    env_file:
+      - .env
     ports:
       - 80:80
       - 443:443
@@ -35,6 +39,15 @@ services:
     volumes:
       - move:/data
       - wordpress:/var/www/html/wordpress
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    networks:
+      - vikka
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
 
 networks:
   vikka:
