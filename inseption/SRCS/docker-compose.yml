@@ -5,29 +5,63 @@ services:
     image: mariadb
     container_name: mariadb
     restart: on-failure
+    init: true
+    tty: true
+    volumes:
+      - db:/var/lib/mysql
   nginx:
     build: ./requirements/nginx/
     image: nginx
     container_name: nginx
     init: true
     ports:
-      - 7780:80
+      - 80:80
       - 443:443
     restart: on-failure
     networks:
       - vikka
+    volumes:
+      - move:/data
+      - wordpress:/var/www/html/wordpress
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress
     container_name: wordpress
     init: true
+    tty: true
     restart: on-failure
     networks:
       - vikka
+    volumes:
+      - move:/data
+      - wordpress:/var/www/html/wordpress
 
 networks:
   vikka:
     driver: bridge 
   artur:
     driver: bridge
+
+volumes:
+    db:
+      name: db
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /Users/mdulcie/Desktop/github/Inseption/inseption/SRCS/data/db
+    move:
+      name: move
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /Users/mdulcie/Desktop/github/Inseption/inseption/SRCS/data/move
+    wordpress:
+      name: wordpress1
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /Users/mdulcie/Desktop/github/Inseption/inseption/SRCS/data/wordpress
 

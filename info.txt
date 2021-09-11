@@ -104,7 +104,25 @@ https://zalinux.ru/?p=4490
 https://coderoad.ru/58636607/%D0%9A%D0%B0%D0%BA-%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D1%82%D1%8C-a-docker-compose-yml-%D0%B8-%D1%87%D1%82%D0%BE-%D0%B4%D0%B5%D0%BB%D0%B0%D1%8E%D1%82-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B-stdin_open
 
 ______________________________________________________________
+Wordpress
+
+Учебник хороший
+https://wp-kama.ru/handbook/wp-cli
+
+CURl
+https://ru.wikipedia.org/wiki/CURL
+
+Procps
+https://www.opennet.ru/docs/RUS/lfs5/appendixa/procps.html
+
+net-tools
+https://nettools.ru/
+
+telnet для портов
+https://losst.ru/kak-polzovatsya-telnet
 ______________________________________________________________
+NGINX
+https://nginx.org/ru/docs/beginners_guide.html
 ______________________________________________________________
 ______________________________________________________________
 ______________________________________________________________
