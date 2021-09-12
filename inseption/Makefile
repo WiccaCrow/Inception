@@ -29,12 +29,14 @@ login-nginx:		;	docker exec -it nginx bash
 login-wp:	;	docker exec -it wordpress bash
 
 clean:				;	docker system prune -a
+						rm -rf ./srcs/data/db/*
+						rm -rf ./srcs/data/wordpress/*
 
 ls-volume:			;	docker volume ls
 ls-container:		;	docker container ls -a
 ls-network:			;	docker network ls
 ls-image:			;	docker image ls
 
-re: stop_down clean all
+re: clean all
 
 help:				;	make -pRrq  -f $(THIS_FILE) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
