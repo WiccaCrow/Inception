@@ -103,6 +103,24 @@ https://zalinux.ru/?p=4490
 что делают stdin_open или tty
 https://coderoad.ru/58636607/%D0%9A%D0%B0%D0%BA-%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C-%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D1%82%D1%8C-a-docker-compose-yml-%D0%B8-%D1%87%D1%82%D0%BE-%D0%B4%D0%B5%D0%BB%D0%B0%D1%8E%D1%82-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B-stdin_open
 
+
+
+
+
+
+ДЛЯ ЧЕГО БЫВАЕТ НУЖЕН TTY?
+Некоторые программы требуют подготовки tty для своей работы. Например tmux - менеджер терминалов.
+И ниже изученные на эту тему ссылки:
+
+Выставление устройства TTY в контейнере docker с docker для mac
+					https://coderoad.ru/40442284/%D0%92%D1%8B%D1%81%D1%82%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%B0-TTY-%D0%B2-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B5-docker-%D1%81-docker-%D0%B4%D0%BB%D1%8F-mac
+
+Docker: выполнить программу, которая требует tty
+					https://coderoad.ru/36058530/Docker-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D1%8C-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%83-%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D0%B0%D1%8F-%D1%82%D1%80%D0%B5%D0%B1%D1%83%D0%B5%D1%82-tty
+
+Docker tty - это не tty с docker exec	https://github.com/moby/moby/issues/8755
+Tmux 					https://habr.com/ru/post/126996/  
+
 ______________________________________________________________
 Wordpress
 
@@ -154,4 +172,45 @@ ______________________________________________________________
 
 https://codepen.io/
 ______________________________________________________________
+
+MAKEFILE
+
+#  https://www.gnu.org/software/make/manual/make.pdf
+#  https://www.gnu.org/software/make/manual/
+
+THIS_FILE := $(lastword $(MAKEFILE_LIST))
+.PHONY: help build up start down destroy stop restart logs logs-api ps login-timescale login-api db-shell
+# Commands available for make:
+#  https://question-it.com/questions/4885548/kak-poluchit-spisok-tselej-v-make-fajle
+#  https://habr.com/ru/company/ruvds/blog/486682/
+help:	;	make -pRrq  -f $(THIS_FILE) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
+
+# Collect an image from docker-compose.yml
+build:	;	docker-compose -f docker-compose.yml build $(c)
+
+up:
+		docker-compose -f docker-compose.yml up -d $(c)
+start:
+		docker-compose -f docker-compose.yml start $(c)
+down:
+		docker-compose -f docker-compose.yml down $(c)
+destroy:
+		docker-compose -f docker-compose.yml down -v $(c)
+stop:
+		docker-compose -f docker-compose.yml stop $(c)
+restart:
+		docker-compose -f docker-compose.yml stop $(c)
+		docker-compose -f docker-compose.yml up -d $(c)
+logs:
+		docker-compose -f docker-compose.yml logs --tail=100 -f $(c)
+logs-api:
+		docker-compose -f docker-compose.yml logs --tail=100 -f api
+ps:
+		docker-compose -f docker-compose.yml ps
+login-timescale:
+		docker-compose -f docker-compose.yml exec timescale /bin/bash
+login-api:
+		docker-compose -f docker-compose.yml exec api /bin/bash
+db-shell:
+		docker-compose -f docker-compose.yml exec timescale psql -Upostgres
 

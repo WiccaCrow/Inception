@@ -1,7 +1,7 @@
 FROM debian:buster
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get -y install wget php-fpm php-pdo-mysql php-mbstring php-mysqli procps net-tools telnet vim && \
+    apt-get -y install wget php-fpm mariadb-client php-pdo-mysql php-mbstring php-mysqli procps net-tools telnet vim && \
     mkdir -p /run/php /var/www/html
 
 WORKDIR /var/www/html
@@ -12,3 +12,10 @@ RUN wget https://ru.wordpress.org/wordpress-5.8.1-ru_RU.tar.gz && tar -xzf wordp
     chown -R root /var/www/html/wordpress && chmod -R 755 /var/www/html/wordpress
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY ./tools/wp_conf_start.sh /wp_conf_start.sh
+
+WORKDIR /
+
+RUN chmod +x /wp_conf_start.sh
+
+CMD ["/wp_conf_start.sh"]

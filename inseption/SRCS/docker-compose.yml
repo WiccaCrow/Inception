@@ -7,6 +7,8 @@ services:
     restart: on-failure
     init: true
     tty: true
+    env_file:
+      - .env
     volumes:
       - db:/var/lib/mysql
     networks:
@@ -16,10 +18,9 @@ services:
     image: nginx
     container_name: nginx
     init: true
-    env_file:
-      - .env
+
     ports:
-      - 80:80
+      # - 80:80
       - 443:443
     restart: on-failure
     networks:
@@ -32,22 +33,27 @@ services:
     image: wordpress
     container_name: wordpress
     init: true
-    tty: true
+    env_file:
+      - .env
     restart: on-failure
     networks:
       - vikka
     volumes:
       - move:/data
       - wordpress:/var/www/html/wordpress
-  phpmyadmin:
-    image: phpmyadmin
-    restart: always
-    networks:
-      - vikka
-    ports:
-      - 8080:80
-    environment:
-      - PMA_ARBITRARY=1
+    tty: true
+    depends_on:
+      - mariadb
+  # phpmyadmin:
+  #   image: phpmyadmin
+  #   # restart: always
+  #   restart: on-failure
+  #   networks:
+  #     - vikka
+  #   ports:
+  #     - 8080:80
+  #   environment:
+  #     - PMA_ARBITRARY=1
 
 networks:
   vikka:
