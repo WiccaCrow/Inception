@@ -12,5 +12,3 @@ RUN chmod +x /mdb_conf_start.sh
 ENTRYPOINT ["/mdb_conf_start.sh"]
 
 CMD ["/usr/sbin/mysqld", "--port=3306", "--init-file", "/init.sql"]
-
-# CMD ["/usr/sbin/mysqld","--init-file","/scripts/init.sql"]

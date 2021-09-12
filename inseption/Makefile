@@ -24,9 +24,9 @@ logs-api:			;	docker-compose -f ./srcs/docker-compose.yml logs --tail=100 -f api
 
 ps:					;	docker ps
 
-login-mdb:		;	docker exec -it mariadb bash
+login-mdb:			;	docker exec -it mariadb bash
 login-nginx:		;	docker exec -it nginx bash
-login-wp:	;	docker exec -it wordpress bash
+login-wp:			;	docker exec -it wordpress bash
 
 clean:				;	docker system prune -a
 						rm -rf ./srcs/data/db/*
