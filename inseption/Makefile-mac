@@ -8,12 +8,12 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 #  https://habr.com/ru/company/ruvds/blog/486682/
 
 # Collect an image from docker-compose.yml
-all: build up start
+all: build up
 dir_create:			;	mkdir -p /Users/mdulcie/Desktop/github/Inseption/inseption/SRCS/data/db
 						mkdir -p /Users/mdulcie/Desktop/github/Inseption/inseption/SRCS/data/wordpress
 						chmod -R 777 /Users/mdulcie/Desktop/github/Inseption/inseption/SRCS/data/
-# build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build --no-cache
-build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build
+build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build --no-cache
+# build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build
 up:					;	docker-compose -f ./srcs/docker-compose-mac.yml up
 start:				;	docker-compose -f ./srcs/docker-compose-mac.yml start
 stop:				;	docker-compose -f ./srcs/docker-compose-mac.yml stop
@@ -34,7 +34,9 @@ login-wp:			;	docker exec -it wordpress bash
 clean:				;	docker system prune -a
 						rm -rf ./srcs/data/db/*
 						rm -rf ./srcs/data/wordpress/*
-						docker volume rm $(docker volume ls -q --filter dangling=true)
+						# docker volume rm $(docker volume ls -q --filter dangling=true)
+						docker volume rm db
+						docker volume rm wordpress1
 
 ls-volume:			;	docker volume ls
 ls-container:		;	docker container ls -a
