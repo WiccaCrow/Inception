@@ -14,7 +14,7 @@ RUN ln -s /etc/nginx/sites-available/nginx.conf \
 
 # ssl & chown www-data (nginx)
 RUN mkdir /etc/nginx/ssl
-RUN openssl req -newkey rsa:4096 -nodes -x509 -days 3650 \
+RUN openssl req -newkey rsa:2048 -nodes -x509 -days 3650 \
 	-keyout /etc/nginx/ssl/mdulcie.key \
 	-out /etc/nginx/ssl/mdulcie.crt \
 	-subj '/C=RU/ST=Kazan/L=Kazan/O=21school/OU=42cursus/CN=mdulcie'

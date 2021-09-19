@@ -8,25 +8,22 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 #  https://habr.com/ru/company/ruvds/blog/486682/
 
 # Collect an image from docker-compose.yml
-all: build up
+all: build up start
+dir_create:			;	mkdir -p /Users/mdulcie/Desktop/github/Inseption/inseption/SRCS/data/db
+						mkdir -p /Users/mdulcie/Desktop/github/Inseption/inseption/SRCS/data/wordpress
+						chmod -R 777 /Users/mdulcie/Desktop/github/Inseption/inseption/SRCS/data/
+# build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build --no-cache
+build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build
+up:					;	docker-compose -f ./srcs/docker-compose-mac.yml up
+start:				;	docker-compose -f ./srcs/docker-compose-mac.yml start
+stop:				;	docker-compose -f ./srcs/docker-compose-mac.yml stop
+down:				;	docker-compose -f ./srcs/docker-compose-mac.yml down
+stop_down:			;	docker-compose -f ./srcs/docker-compose-mac.yml stop
+						docker-compose -f ./srcs/docker-compose-mac.yml down
 
-dir_create:			;	mkdir -p /home/mdulcie/data/db
-						mkdir -p /home/mdulcie/data/wordpress
-						chmod -R 777 /home/mdulcie/data/
+logs:				;	docker-compose -f ./srcs/docker-compose-mac.yml logs --tail=100 -f
 
-
-# build:				;	docker-compose -f ./srcs/docker-compose.yml build --no-cache
-build:				;	docker-compose -f ./srcs/docker-compose.yml build
-up:					;	docker-compose -f ./srcs/docker-compose.yml up
-start:				;	docker-compose -f ./srcs/docker-compose.yml start
-stop:				;	docker-compose -f ./srcs/docker-compose.yml stop
-down:				;	docker-compose -f ./srcs/docker-compose.yml down
-stop_down:			;	docker-compose -f ./srcs/docker-compose.yml stop
-						docker-compose -f ./srcs/docker-compose.yml down
-
-logs:				;	docker-compose -f ./srcs/docker-compose.yml logs --tail=100 -f
-
-logs-api:			;	docker-compose -f ./srcs/docker-compose.yml logs --tail=100 -f api
+logs-api:			;	docker-compose -f ./srcs/docker-compose-mac.yml logs --tail=100 -f api
 
 ps:					;	docker ps
 
@@ -35,9 +32,9 @@ login-nginx:		;	docker exec -it nginx bash
 login-wp:			;	docker exec -it wordpress bash
 
 clean:				;	docker system prune -a
-						docker volume rm $(docker volume ls -q --filter dangling=true)
 						rm -rf ./srcs/data/db/*
 						rm -rf ./srcs/data/wordpress/*
+						docker volume rm $(docker volume ls -q --filter dangling=true)
 
 ls-volume:			;	docker volume ls
 ls-container:		;	docker container ls -a
