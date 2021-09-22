@@ -1,2 +1,0 @@
-wp core install --allow-root --url=localhost:443 --title=mdulcie.ru --admin_user=admin  --admin_password=admin --admin_email=example@example.com
-wp config create --allow-root --dbname=WP --dbuser=admin --dbpass=admin --dbhost=marisadb:3306 --dbprefix=wp

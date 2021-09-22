@@ -7,10 +7,10 @@ services:
     container_name: mariadb
     restart: on-failure
     # init: true # for v3.9
-    tty: true # for v3.9
+    # tty: true # for v3.9
     # command: "sleep 1000000"
     env_file:
-      - .env
+      - mac.env
     volumes:
       - db:/var/lib/mysql
     networks:
@@ -35,7 +35,7 @@ services:
     container_name: wordpress
     # init: true  # for v3.9
     env_file:
-      - .env
+      - mac.env
     restart: on-failure
     networks:
       - vikka
@@ -44,16 +44,16 @@ services:
     # tty: true  # for v3.9
     depends_on:
       - mariadb
-  # phpmyadmin:
-  #   image: phpmyadmin
-  #   # restart: always
-  #   restart: on-failure
-  #   networks:
-  #     - vikka
-  #   ports:
-  #     - 8080:80
-  #   environment:
-  #     - PMA_ARBITRARY=1
+  phpmyadmin:
+    image: phpmyadmin
+    # restart: always
+    restart: on-failure
+    networks:
+      - vikka
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
 
 networks:
   vikka:
@@ -66,12 +66,12 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /home/mdulcie/data/db
+        device: /home/user/Desktop/github/Inseption/inseption/srcs/data/db
     wordpress:
       name: wordpress1
       driver: local
       driver_opts:
         type: none
         o: bind
-        device: /home/mdulcie/data/wordpress
+        device: /home/user/Desktop/github/Inseption/inseption/srcs/data/wordpress
 
