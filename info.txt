@@ -199,3 +199,29 @@ CMD и ENTRYPOINT
 Что использовать []exec или shell?
 https://habr.com/ru/company/southbridge/blog/329138/
 
+
+______________________________________________________________
+______________________________________________________________
+REDIS
+https://wpgutenberg.top/nastrojka-redis-dlja-wordpress/
+
+______________________________________________________________
+настройка кэша для wordpress - установка плагинов
+https://developer.wordpress.org/reference/classes/wp_object_cache/
+______________________________________________________________
+настройка redis
+https://www.8host.com/blog/nastrojka-keshirovaniya-redis-dlya-uskoreniya-wordpress/
+______________________________________________________________
+настройка кэша и брандмауэра
+https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-debian-9
+______________________________________________________________
+САМАЯ ПОДРОБНАЯ НАСТРОЙКА REDIS И WORDPRESS
+
+https://www.8host.com/blog/nastrojka-keshirovaniya-redis-dlya-uskoreniya-wordpress/
+______________________________________________________________
+______________________________________________________________
+______________________________________________________________
+______________________________________________________________
+
+
+
