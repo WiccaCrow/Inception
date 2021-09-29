@@ -1,0 +1,77 @@
+version: "3.9"
+# version: "3.6"
+services:
+  mariadb:
+    build: ./requirements/mariadb/
+    image: mariadb
+    container_name: mariadb
+    restart: on-failure
+    # init: true # for v3.9
+    # tty: true # for v3.9
+    # command: "sleep 1000000"
+    env_file:
+      - mac.env
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - vikka
+  nginx:
+    build: ./requirements/nginx/
+    image: nginx
+    container_name: nginx
+    # init: true # for v3.9
+
+    ports:
+      # - 80:80
+      - 443:443
+    restart: on-failure
+    networks:
+      - vikka
+    volumes:
+      - wordpress:/var/www/html/wordpress
+  wordpress:
+    build: ./requirements/wordpress/
+    image: wordpress
+    container_name: wordpress
+    # init: true  # for v3.9
+    env_file:
+      - mac.env
+    restart: on-failure
+    networks:
+      - vikka
+    volumes:
+      - wordpress:/var/www/html/wordpress
+    # tty: true  # for v3.9
+    depends_on:
+      - mariadb
+  # phpmyadmin:
+  #   image: phpmyadmin
+  #   # restart: always
+  #   restart: on-failure
+  #   networks:
+  #     - vikka
+  #   ports:
+  #     - 8080:80
+  #   environment:
+  #     - PMA_ARBITRARY=1
+
+networks:
+  vikka:
+    driver: bridge 
+
+volumes:
+    db:
+      name: db
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /Users/mdulcie/Desktop/github/Inception/inception/srcs/data/db
+    wordpress:
+      name: wordpress1
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /Users/mdulcie/Desktop/github/Inception/inception/srcs/data/wordpress
+
