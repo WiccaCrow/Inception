@@ -44,6 +44,19 @@ services:
     # tty: true  # for v3.9
     depends_on:
       - mariadb
+      - redis
+  redis:
+    build: ./requirements/redis/
+    image: redis
+    container_name: redis
+    # init: true  # for v3.9
+    # env_file:
+      # - mac.env
+    # restart: on-failure
+    restart: always
+    tty: true  # for v3.9
+    networks:
+      - vikka
   # phpmyadmin:
   #   image: phpmyadmin
   #   # restart: always

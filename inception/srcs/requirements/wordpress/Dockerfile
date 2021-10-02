@@ -1,7 +1,7 @@
 FROM debian:buster
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get -y install unzip wget php-fpm mariadb-client php-pdo-mysql php-mbstring php-mysqli procps net-tools telnet vim && \
+    apt-get -y install unzip wget php-fpm mariadb-client php-pdo-mysql php-mbstring php-mysqli procps net-tools telnet vim php-redis && \
     mkdir -p /run/php /var/www/html
 
 WORKDIR /var/www/html

@@ -28,9 +28,10 @@ logs-api:			;	docker-compose -f ./srcs/docker-compose-ubuntu.yml logs --tail=100
 
 ps:					;	docker ps
 
-login-mdb:			;	docker exec -it mariadb bash
-login-nginx:		;	docker exec -it nginx bash
-login-wp:			;	docker exec -it wordpress bash
+login_mdb:			;	docker exec -it mariadb bash
+login_nginx:		;	docker exec -it nginx bash
+login_wp:			;	docker exec -it wordpress bash
+login_redis:		;	docker exec -it redis bash
 
 clean:				;	docker system prune -a
 						sudo rm -rf ./srcs/data
