@@ -13,8 +13,8 @@ dir_create:			;	mkdir -p ./srcs/data/db
 						mkdir -p ./srcs/data/wordpress
 						chmod -R 777 ./srcs/data/
 
-build:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml build --no-cache
-# build:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml build
+# build:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml build --no-cache
+build:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml build
 up:					;	docker-compose -f ./srcs/docker-compose-ubuntu.yml up
 start:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml start
 stop:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml stop

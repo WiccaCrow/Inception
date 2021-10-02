@@ -218,7 +218,13 @@ ______________________________________________________________
 САМАЯ ПОДРОБНАЯ НАСТРОЙКА REDIS И WORDPRESS
 
 https://www.8host.com/blog/nastrojka-keshirovaniya-redis-dlya-uskoreniya-wordpress/
+
+Значения define для redis в конфиг-скрипте wp-config.php
+https://wp-kama.ru/plugin/redis-object-cache
 ______________________________________________________________
+sed для замены wp-config.php для настройки redis
+https://andreyex.ru/linux/kak-zamenit-stroku-v-fajle-v-bash/
+https://stackoverflow.com/questions/26009752/replace-line-in-text-file-with-line-from-other-text-file
 ______________________________________________________________
 ______________________________________________________________
 ______________________________________________________________
