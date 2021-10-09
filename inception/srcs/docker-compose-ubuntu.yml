@@ -20,7 +20,6 @@ services:
     image: nginx
     container_name: nginx
     # init: true # for v3.9
-
     ports:
       # - 80:80
       - 443:443
@@ -29,6 +28,10 @@ services:
       - vikka
     volumes:
       - wordpress:/var/www/html/wordpress
+    # extra_hosts:
+    #   - "wordpress:wordpress"
+    depends_on:
+      - wordpress
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress
@@ -49,15 +52,29 @@ services:
     image: redis
     container_name: redis
     # init: true  # for v3.9
-    # env_file:
-      # - mac.env
-    # restart: on-failure
-    restart: always
-    tty: true  # for v3.9
+    restart: on-failure
+    # restart: always
+    # tty: true  # for v3.9
     networks:
       - vikka
     depends_on:
       - wordpress
+  vsftpd:
+    build: ./requirements/vsftpd/
+    image: vsftpd
+    container_name: vsftpd
+    # init: true  # for v3.9
+    # restart: on-failure
+    tty: true  # for v3.9
+    restart: always
+    volumes:
+      - wordpress:/wordpress
+    networks:
+      - vikka
+    depends_on:
+      - wordpress
+    env_file:
+      - ftp_serv.env
   # phpmyadmin:
   #   image: phpmyadmin
   #   # restart: always

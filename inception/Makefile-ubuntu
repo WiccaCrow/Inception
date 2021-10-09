@@ -8,7 +8,9 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 #  https://habr.com/ru/company/ruvds/blog/486682/
 
 # Collect an image from docker-compose.yml
-all: build up
+# all: build up
+all: dir_create build up
+
 dir_create:			;	mkdir -p ./srcs/data/db
 						mkdir -p ./srcs/data/wordpress
 						chmod -R 777 ./srcs/data/
@@ -20,7 +22,7 @@ start:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml start
 stop:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml stop
 down:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml down
 stop_down:			;	docker-compose -f ./srcs/docker-compose-ubuntu.yml stop
-						docker-compose -f ./srcs/docker-compose-ubuntu.yml down
+						docker-compose -f ./srcs/docker-compose-ubuntu.yml down -v
 
 logs:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml logs --tail=100 -f
 
@@ -32,6 +34,7 @@ login_mdb:			;	docker exec -it mariadb bash
 login_nginx:		;	docker exec -it nginx bash
 login_wp:			;	docker exec -it wordpress bash
 login_redis:		;	docker exec -it redis bash
+login_vsftpd:		;	docker exec -it vsftpd bash
 
 clean:				;	docker system prune -a
 						sudo rm -rf ./srcs/data

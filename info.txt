@@ -205,6 +205,8 @@ ______________________________________________________________
 REDIS
 https://wpgutenberg.top/nastrojka-redis-dlja-wordpress/
 
+TCP backlog
+https://rtfm.co.ua/redis-osnovnye-parametry-konfiguracii-i-tyuning-proizvoditelnosti/#tcp-backlog_%D0%B8_netcoresomaxconn
 ______________________________________________________________
 настройка кэша для wordpress - установка плагинов
 https://developer.wordpress.org/reference/classes/wp_object_cache/
@@ -221,6 +223,9 @@ https://www.8host.com/blog/nastrojka-keshirovaniya-redis-dlya-uskoreniya-wordpre
 
 Значения define для redis в конфиг-скрипте wp-config.php
 https://wp-kama.ru/plugin/redis-object-cache
+
+значение в конфиге
+https://rtfm.co.ua/redis-osnovnye-parametry-konfiguracii-i-tyuning-proizvoditelnosti/
 ______________________________________________________________
 sed для замены wp-config.php для настройки redis
 https://ru.ccm.net/faq/3066-udalit-stroki-iz-faila-s-ispolzovaniem-sed
@@ -232,7 +237,30 @@ If then fi
 https://losst.ru/proverka-sushhestvovaniya-fajla-bash
 https://coderoad.ru/36895386/%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-syntax-error-near-unexpected-token-else-%D0%B2-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B5-shell
 ______________________________________________________________
+socket это
+https://masandilov.ru/network/guide_to_network_programming__what_is_socket
 ______________________________________________________________
+FTP-сервер
+https://www.opennet.ru/base/net/vsftpd_overview.txt.html
+
+umask что это и как пользоваться. Подробно и доходчиво. Надо для конфига фтп-сервера
+https://handynotes.ru/2010/02/umask.html
+
+Доходчиво, личный опыт создания ftp
+https://www.cyberforum.ru/ubuntu-linux/thread968074.html
+
+Демон inetd/xinetd
+https://it.wikireading.ru/9731
+
+
+ftp-клиент: netkit (apt-get install ftp) vs filezilla и других современных клиентов для управления из терминала фтп сервером.
+Или почему лучше от netkit отказаться
+https://github.com/mmaraya/netkit-ftp
+netkit-ftp - это оригинальная клиентская программа для передачи файлов для Linux. Хотя netkit-ftp больше не поддерживается, он все еще включен в различные дистрибутивы Linux и, по мнению Linux Foundation, является самым рискованным приложением с открытым исходным кодом. Цель этого проекта - выявить и устранить слабые места в netkit-ftp и обновить дистрибутивы Linux, которые все еще содержат его. Если вы ищете современный и более безопасный FTP-клиент, рассмотрите lftp .
+
+______________________________________________________________
+КАК ПОСМОТРЕТЬ СПИСОК ПОЛЬЗОВАТЕЛЕЙ В ТЕРМИНАЛЕ
+https://losst.ru/kak-posmotret-spisok-polzovatelej-v-ubuntu
 
 
 

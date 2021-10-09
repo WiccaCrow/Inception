@@ -4,6 +4,6 @@
 * https://wp-kama.ru/plugin/redis-object-cache
 */
 
-define('WP_REDIS_HOST', '127.0.0.1');
+define('WP_REDIS_HOST', 'redis');
 define('WP_REDIS_PORT', '6379');
 define('WP_CACHE_KEY_SALT', 'mdulcie_cache_prefix');

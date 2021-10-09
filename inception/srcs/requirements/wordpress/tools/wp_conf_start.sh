@@ -23,7 +23,7 @@ chmod 666 /var/www/html/wordpress/wp-config.php
 sed -i '67d/67r "define( 'WP_DEBUG', false );"' /var/www/html/wordpress/wp-config.php
 
 # https://stackoverflow.com/questions/26009752/replace-line-in-text-file-with-line-from-other-text-file
-sed -i '40,58d;1r /wp-config_redis.txt' /var/www/html/wordpress/wp-config.php
+sed -i '40,58d;39r /wp-config_redis.txt' /var/www/html/wordpress/wp-config.php
 
 chmod 644 /var/www/html/wordpress/wp-config.php
 fi
