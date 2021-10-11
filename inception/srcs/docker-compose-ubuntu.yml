@@ -63,12 +63,14 @@ services:
     build: ./requirements/vsftpd/
     image: vsftpd
     container_name: vsftpd
+    ports:
+      - 21:21
     # init: true  # for v3.9
     # restart: on-failure
     tty: true  # for v3.9
     restart: always
     volumes:
-      - wordpress:/wordpress
+      - wordpress:/home/vsftpdusers/for_ftp_serv
     networks:
       - vikka
     depends_on:

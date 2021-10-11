@@ -261,6 +261,10 @@ netkit-ftp - это оригинальная клиентская програм
 ______________________________________________________________
 КАК ПОСМОТРЕТЬ СПИСОК ПОЛЬЗОВАТЕЛЕЙ В ТЕРМИНАЛЕ
 https://losst.ru/kak-posmotret-spisok-polzovatelej-v-ubuntu
+______________________________________________________________
+для чего в конфиге WordPress строка
+define('FS_METHOD', 'direct');
+https://moonback.ru/page/wordpress-ftp
 
 
 

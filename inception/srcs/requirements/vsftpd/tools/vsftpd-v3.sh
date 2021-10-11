@@ -17,6 +17,8 @@ if [ 1 == $? ]; then
     echo /home/$USER_NAME/for_ftp_serv >> /local_root_dir.txt
     sed -i '14d;14r /local_root_dir.txt' /etc/vsftpd.conf
     rm /local_root_dir.txt
+# пустая папка для безопасности
+    mkdir -p /var/run/vsftpd/empty
 fi
 
 sed 's/:.*//' /etc/passwd | grep $USER_NAME
@@ -24,4 +26,4 @@ if [ 0 == $? ]; then
     echo "yes user"
 fi
 
-# vsftpd /etc/vsftpd.conf
+vsftpd /etc/vsftpd.conf
