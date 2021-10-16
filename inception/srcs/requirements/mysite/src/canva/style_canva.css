@@ -1,0 +1,76 @@
+html , body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* font-size: 62.5%; */
+}
+
+/* https://cssgradient.io/ */
+body {
+    height: 100vh;
+    /* width: 100px; */
+    /* overflow: hidden; */
+    background: linear-gradient(to bottom right, rgba(241,249,253,1) 0%, rgba(254,186,115,1) 47%, rgba(255,170,170,1) 100%);
+}
+
+.container {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.header > div {
+    border: 3px solid green;
+    margin: 5px;
+}
+
+.header {
+    border: 1px solid blue;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    height: 25vh;
+    width: 100%;
+    /* background-color: transparent; */
+    /* background-image: linear-gradient(180deg,rgba(52, 97, 182, 0.075),rgba(0, 0, 0, 0)),url(./term3_1.png); */
+    background-image: url(./term3_1_1.png);
+    /* opacity: 0.6; */
+    /* background-image: url(./term3_2.png); */
+    background-size: 100% 50%;
+    background-repeat: no-repeat;
+    background-position: top;
+    padding-bottom: 10px;
+    
+    position: fixed;
+
+}
+
+.photo {
+    align-self: center;
+    margin-bottom: 2%;
+
+    width: 18vh;
+    height: 18vh;
+    border-radius: 50%;
+    
+}
+
+.full_name{
+    height: 25%;
+    margin-bottom: 2%;
+    width: 22%;
+
+
+}
+
+
+.contacts{
+    height: 25%;
+    margin-bottom: 2%;
+    width: 22%;
+}
+
+.photo_img{
+width: 100%;
+height: 100%;
+border-radius: 50%;
+}

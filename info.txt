@@ -267,4 +267,36 @@ define('FS_METHOD', 'direct');
 https://moonback.ru/page/wordpress-ftp
 
 
+______________________________________________________________
+
+HTML
+
+Градиент на фон
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Images/Using_CSS_gradients
+
+Шпаргалка
+http://htmlbook.ru/html/h1
+https://developer.mozilla.org/ru/docs/Web/HTML/Element
+
+
+
+
+EMMET шпаргалка
+https://dwstroy.ru/stail/plaginy-rasshireniya/emmet-shpargalka/
+
+
+
+CSS
+Шпаргалка 
+https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+
+Flexbox
+https://tpverstak.ru/flex-cheatsheet/
+
+Flexbox игра обучающая
+https://flexboxfroggy.com/#ru
+
+
 
