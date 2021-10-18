@@ -28,6 +28,7 @@ services:
       - vikka
     volumes:
       - wordpress:/var/www/html/wordpress
+      - resume:/var/www/html/resume
     # extra_hosts:
     #   - "wordpress:wordpress"
     depends_on:
@@ -107,3 +108,10 @@ volumes:
         type: none
         o: bind
         device: /home/user/Desktop/github/Inception/inception/srcs/data/wordpress
+    resume:
+      name: resume
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /home/user/Desktop/github/Inception/inception/srcs/data/resume

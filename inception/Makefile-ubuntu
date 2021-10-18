@@ -13,6 +13,7 @@ all: dir_create build up
 
 dir_create:			;	mkdir -p ./srcs/data/db
 						mkdir -p ./srcs/data/wordpress
+						mkdir -p ./srcs/data/resume
 						chmod -R 777 ./srcs/data/
 
 # build:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml build --no-cache

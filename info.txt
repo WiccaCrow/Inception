@@ -141,6 +141,9 @@ https://losst.ru/kak-polzovatsya-telnet
 ______________________________________________________________
 NGINX
 https://nginx.org/ru/docs/beginners_guide.html
+
+location
+http://nginx.org/ru/docs/http/ngx_http_core_module.html#location
 ______________________________________________________________
 MYSQL
 https://tproger.ru/translations/sql-recap/
