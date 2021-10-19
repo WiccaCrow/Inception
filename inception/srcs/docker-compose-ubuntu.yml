@@ -66,10 +66,7 @@ services:
     container_name: vsftpd
     ports:
       - 21:21
-    # init: true  # for v3.9
     restart: on-failure
-    # tty: true  # for v3.9
-    # restart: always
     volumes:
       - wordpress:/home/vsftpdusers/for_ftp_serv
     networks:
@@ -82,15 +79,15 @@ services:
     build: ./requirements/adminer/
     image: adminer
     container_name: adminer
-    restart: on-failure
-    # restart: always
-    # tty: true
+    # restart: on-failure
+    restart: always
+    tty: true
     networks:
       - vikka
-    ports:
-      - 8080:80
     volumes:
       - wordpress:/var/www/html
+    depends_on:
+      - nginx
   # phpmyadmin:
   #   image: phpmyadmin
   #   # restart: always
