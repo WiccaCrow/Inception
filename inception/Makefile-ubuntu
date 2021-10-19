@@ -13,7 +13,6 @@ all: dir_create build up
 
 dir_create:			;	mkdir -p ./srcs/data/db
 						mkdir -p ./srcs/data/wordpress
-						mkdir -p ./srcs/data/resume
 						chmod -R 777 ./srcs/data/
 
 # build:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml build --no-cache
@@ -39,7 +38,7 @@ login_vsftpd:		;	docker exec -it vsftpd bash
 
 clean:				;	docker system prune -a
 						sudo rm -rf ./srcs/data
-						docker volume rm db wordpress1
+						docker volume rm db resume wordpress1 
 						# docker volume rm $(docker volume ls -q --filter dangling=true)
 
 ls_volume:			;	docker volume ls

@@ -67,9 +67,9 @@ services:
     ports:
       - 21:21
     # init: true  # for v3.9
-    # restart: on-failure
-    tty: true  # for v3.9
-    restart: always
+    restart: on-failure
+    # tty: true  # for v3.9
+    # restart: always
     volumes:
       - wordpress:/home/vsftpdusers/for_ftp_serv
     networks:
@@ -78,6 +78,19 @@ services:
       - wordpress
     env_file:
       - ftp_serv.env
+  adminer:
+    build: ./requirements/adminer/
+    image: adminer
+    container_name: adminer
+    restart: on-failure
+    # restart: always
+    # tty: true
+    networks:
+      - vikka
+    ports:
+      - 8080:80
+    volumes:
+      - wordpress:/var/www/html
   # phpmyadmin:
   #   image: phpmyadmin
   #   # restart: always
@@ -114,4 +127,5 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /home/user/Desktop/github/Inception/inception/srcs/data/resume
+        device: /home/user/Desktop/github/Inception/inception/srcs/requirements/mysite
+

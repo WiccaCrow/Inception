@@ -8,7 +8,7 @@ RUN  ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
 COPY ./conf/nginx.conf /etc/nginx/sites-available
-COPY ./mysite /var/www/html/resume
+# COPY ./mysite /var/www/html/resume
 
 RUN ln -s /etc/nginx/sites-available/nginx.conf \
           /etc/nginx/sites-enabled/nginx.conf

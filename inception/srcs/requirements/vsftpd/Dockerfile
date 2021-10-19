@@ -6,7 +6,7 @@ RUN apt-get update && apt-get upgrade -y && \
     rm /etc/vsftpd.conf
 
 COPY ./conf/vsftpd.conf /vsftpd.conf
-COPY ./tools/vsftpd-v3.sh /vsftpd.sh
+COPY ./tools/vsftpd.sh /vsftpd.sh
 RUN chmod +x /vsftpd.sh
 
 CMD ["/vsftpd.sh"]
