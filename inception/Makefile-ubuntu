@@ -28,7 +28,7 @@ logs:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml logs --tail=100 -f
 
 logs-api:			;	docker-compose -f ./srcs/docker-compose-ubuntu.yml logs --tail=100 -f api
 
-ps:					;	docker ps
+ps:					;	docker-compose -f ./srcs/docker-compose-ubuntu.yml ps
 
 login_mdb:			;	docker exec -it mariadb bash
 login_nginx:		;	docker exec -it nginx bash
@@ -37,6 +37,7 @@ login_redis:		;	docker exec -it redis bash
 login_vsftpd:		;	docker exec -it vsftpd bash
 
 clean:				;	docker system prune -a
+# docker-compose -f ./srcs/docker-compose-ubuntu.yml rm
 						sudo rm -rf ./srcs/data
 						docker volume rm db resume wordpress1 
 						# docker volume rm $(docker volume ls -q --filter dangling=true)
@@ -48,4 +49,4 @@ ls_image:			;	docker image ls
 
 re: clean all
 
-help:				;	make -pRrq  -f $(THIS_FILE) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
+# help:				;	make -pRrq  -f $(THIS_FILE) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
