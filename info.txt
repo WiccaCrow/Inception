@@ -159,14 +159,10 @@ location
 http://nginx.org/ru/docs/http/ngx_http_core_module.html#location
 ______________________________________________________________
 MYSQL
+Основные команды
 https://tproger.ru/translations/sql-recap/
 
 http://www.mysql.ru/docs/man/Adding_users.html
-
-https://dev.mysql.com/doc/refman/8.0/en/resetting-permissions.html
-
-https://superuser.com/questions/629709/how-to-exit-mysql-command-prompt/863075
-
 
 Флаг порт
 http://dba.fyicenter.com/faq/mysql/mysqld-Command-Line-Option.html
