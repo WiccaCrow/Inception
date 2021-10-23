@@ -183,6 +183,9 @@ https://mariadb.com/kb/en/mysql-command-line-client/
 https://www.ibm.com/docs/en/spectrum-lsf-rtm/10.2.0?topic=ssl-configuring-default-root-password-mysqlmariadb
 
 https://russianblogs.com/article/71831510312/
+
+Команды mysql
+https://rtfm.co.ua/mysql-commands/
 ______________________________________________________________
 Темы для оформления сайтов
 

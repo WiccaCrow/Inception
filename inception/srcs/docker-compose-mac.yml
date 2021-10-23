@@ -86,21 +86,21 @@ services:
       - wordpress:/var/www/html
     depends_on:
       - nginx
-  grafana:
-    build: ./requirements/grafana/
-    image: grafana
-    container_name: grafana
-    ports:
-      - 3000:3000
-    tty: true
-    restart: always
-    # restart: on-failure
-    # volumes:
-    #   - wordpress:/home/sshuser/for_ssh
-    networks:
-      - vikka
-    depends_on:
-      - wordpress
+  # grafana:
+  #   build: ./requirements/grafana/
+  #   image: grafana
+  #   container_name: grafana
+  #   ports:
+  #     - 3000:3000
+  #   tty: true
+  #   restart: always
+  #   # restart: on-failure
+  #   # volumes:
+  #   #   - wordpress:/home/sshuser/for_ssh
+  #   networks:
+  #     - vikka
+  #   depends_on:
+  #     - mariadb
     # env_file:
     #   - ssh.env
   # phpmyadmin:
