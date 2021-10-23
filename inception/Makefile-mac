@@ -8,12 +8,14 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 #  https://habr.com/ru/company/ruvds/blog/486682/
 
 # Collect an image from docker-compose.yml
-all: build up
+# all: build up
+all: dir_create build up
+
 dir_create:			;	mkdir -p ./srcs/data/db
 						mkdir -p ./srcs/data/wordpress
 						chmod -R 777 ./srcs/data/
-build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build --no-cache
-# build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build
+# build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build --no-cache
+build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build
 up:					;	docker-compose -f ./srcs/docker-compose-mac.yml up
 start:				;	docker-compose -f ./srcs/docker-compose-mac.yml start
 stop:				;	docker-compose -f ./srcs/docker-compose-mac.yml stop

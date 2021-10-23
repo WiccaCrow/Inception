@@ -329,3 +329,7 @@ https://ru.stackoverflow.com/questions/552695/%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D0
 
 ______________________________________________________________
 
+SSH
+
+SSH против SSL
+https://ru.education-wiki.com/9940288-ssh-vs-ssl

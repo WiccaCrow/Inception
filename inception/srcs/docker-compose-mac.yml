@@ -28,10 +28,9 @@ services:
       - vikka
     volumes:
       - wordpress:/var/www/html/wordpress
+      - resume:/var/www/html/resume
     depends_on:
       - wordpress
-
-
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress
@@ -65,10 +64,7 @@ services:
     container_name: vsftpd
     ports:
       - 21:21
-    # init: true  # for v3.9
-    # restart: on-failure
-    tty: true  # for v3.9
-    restart: always
+    restart: on-failure
     volumes:
       - wordpress:/home/vsftpdusers/for_ftp_serv
     networks:
@@ -77,6 +73,36 @@ services:
       - wordpress
     env_file:
       - ftp_serv.env
+  adminer:
+    build: ./requirements/adminer/
+    image: adminer
+    container_name: adminer
+    # restart: on-failure
+    restart: always
+    tty: true
+    networks:
+      - vikka
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - nginx
+  grafana:
+    build: ./requirements/grafana/
+    image: grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    tty: true
+    restart: always
+    # restart: on-failure
+    # volumes:
+    #   - wordpress:/home/sshuser/for_ssh
+    networks:
+      - vikka
+    depends_on:
+      - wordpress
+    # env_file:
+    #   - ssh.env
   # phpmyadmin:
   #   image: phpmyadmin
   #   # restart: always
@@ -90,7 +116,7 @@ services:
 
 networks:
   vikka:
-    driver: bridge 
+    driver: bridge
 
 volumes:
     db:
@@ -107,4 +133,10 @@ volumes:
         type: none
         o: bind
         device: /Users/mdulcie/Desktop/github/Inception/inception/srcs/data/wordpress
-
+    resume:
+      name: resume
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /Users/mdulcie/Desktop/github/Inception/inception/srcs/requirements/mysite

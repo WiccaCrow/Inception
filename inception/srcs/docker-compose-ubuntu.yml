@@ -29,8 +29,6 @@ services:
     volumes:
       - wordpress:/var/www/html/wordpress
       - resume:/var/www/html/resume
-    # extra_hosts:
-    #   - "wordpress:wordpress"
     depends_on:
       - wordpress
   wordpress:
@@ -88,6 +86,21 @@ services:
       - wordpress:/var/www/html
     depends_on:
       - nginx
+  ssh:
+    build: ./requirements/ssh/
+    image: ssh
+    container_name: ssh
+    ports:
+      - 22:22
+    restart: on-failure
+    volumes:
+      - wordpress:/home/sshuser/for_ssh
+    networks:
+      - vikka
+    depends_on:
+      - wordpress
+    env_file:
+      - ssh.env
   # phpmyadmin:
   #   image: phpmyadmin
   #   # restart: always
@@ -125,4 +138,3 @@ volumes:
         type: none
         o: bind
         device: /home/user/Desktop/github/Inception/inception/srcs/requirements/mysite
-
