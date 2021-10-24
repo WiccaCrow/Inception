@@ -6,9 +6,6 @@ services:
     image: mariadb
     container_name: mariadb
     restart: on-failure
-    # init: true # for v3.9
-    # tty: true # for v3.9
-    # command: "sleep 1000000"
     env_file:
       - mac.env
     volumes:
@@ -19,9 +16,7 @@ services:
     build: ./requirements/nginx/
     image: nginx
     container_name: nginx
-    # init: true # for v3.9
     ports:
-      # - 80:80
       - 443:443
     restart: on-failure
     networks:
@@ -35,7 +30,6 @@ services:
     build: ./requirements/wordpress/
     image: wordpress
     container_name: wordpress
-    # init: true  # for v3.9
     env_file:
       - mac.env
     restart: on-failure
@@ -43,17 +37,13 @@ services:
       - vikka
     volumes:
       - wordpress:/var/www/html/wordpress
-    # tty: true  # for v3.9
     depends_on:
       - mariadb
   redis:
     build: ./requirements/redis/
     image: redis
     container_name: redis
-    # init: true  # for v3.9
     restart: on-failure
-    # restart: always
-    # tty: true  # for v3.9
     networks:
       - vikka
     depends_on:
@@ -77,32 +67,13 @@ services:
     build: ./requirements/adminer/
     image: adminer
     container_name: adminer
-    # restart: on-failure
-    restart: always
-    tty: true
+    restart: on-failure
     networks:
       - vikka
     volumes:
       - wordpress:/var/www/html
     depends_on:
       - nginx
-  # grafana:
-  #   build: ./requirements/grafana/
-  #   image: grafana
-  #   container_name: grafana
-  #   ports:
-  #     - 3000:3000
-  #   tty: true
-  #   restart: always
-  #   # restart: on-failure
-  #   # volumes:
-  #   #   - wordpress:/home/sshuser/for_ssh
-  #   networks:
-  #     - vikka
-  #   depends_on:
-  #     - mariadb
-    # env_file:
-    #   - ssh.env
   # phpmyadmin:
   #   image: phpmyadmin
   #   # restart: always
@@ -139,4 +110,4 @@ volumes:
       driver_opts:
         type: none
         o: bind
-        device: /Users/mdulcie/Desktop/github/Inception/inception/srcs/requirements/mysite
+        device: /Users/mdulcie/Desktop/github/Inception/inception/srcs/data/mysite

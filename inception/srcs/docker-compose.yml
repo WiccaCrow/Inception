@@ -6,9 +6,6 @@ services:
     image: mariadb
     container_name: mariadb
     restart: on-failure
-    # init: true # for v3.9
-    # tty: true # for v3.9
-    # command: "sleep 1000000"
     env_file:
       - .env
     volumes:
@@ -19,21 +16,20 @@ services:
     build: ./requirements/nginx/
     image: nginx
     container_name: nginx
-    # init: true # for v3.9
-
     ports:
-      # - 80:80
       - 443:443
     restart: on-failure
     networks:
       - vikka
     volumes:
       - wordpress:/var/www/html/wordpress
+      - resume:/var/www/html/resume
+    depends_on:
+      - wordpress
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress
     container_name: wordpress
-    # init: true  # for v3.9
     env_file:
       - .env
     restart: on-failure
@@ -41,9 +37,43 @@ services:
       - vikka
     volumes:
       - wordpress:/var/www/html/wordpress
-    # tty: true  # for v3.9
     depends_on:
       - mariadb
+  redis:
+    build: ./requirements/redis/
+    image: redis
+    container_name: redis
+    restart: on-failure
+    networks:
+      - vikka
+    depends_on:
+      - wordpress
+  vsftpd:
+    build: ./requirements/vsftpd/
+    image: vsftpd
+    container_name: vsftpd
+    ports:
+      - 21:21
+    restart: on-failure
+    volumes:
+      - wordpress:/home/vsftpdusers/for_ftp_serv
+    networks:
+      - vikka
+    depends_on:
+      - wordpress
+    env_file:
+      - ftp_serv.env
+  adminer:
+    build: ./requirements/adminer/
+    image: adminer
+    container_name: adminer
+    restart: on-failure
+    networks:
+      - vikka
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - nginx
   # phpmyadmin:
   #   image: phpmyadmin
   #   # restart: always
@@ -74,4 +104,10 @@ volumes:
         type: none
         o: bind
         device: /home/mdulcie/data/wordpress
-
+    resume:
+      name: resume
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /home/mdulcie/data/mysite

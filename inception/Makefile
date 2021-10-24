@@ -8,13 +8,12 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 #  https://habr.com/ru/company/ruvds/blog/486682/
 
 # Collect an image from docker-compose.yml
-all: build up
+all: dir_create build up
 
 dir_create:			;	mkdir -p /home/mdulcie/data/db
 						mkdir -p /home/mdulcie/data/wordpress
+						cp -r ./srcs/requirements/mysite ./home/mdulcie/data/mysite
 						chmod -R 777 /home/mdulcie/data/
-
-
 # build:				;	docker-compose -f ./srcs/docker-compose.yml build --no-cache
 build:				;	docker-compose -f ./srcs/docker-compose.yml build
 up:					;	docker-compose -f ./srcs/docker-compose.yml up
@@ -33,11 +32,12 @@ ps:					;	docker ps
 login-mdb:			;	docker exec -it mariadb bash
 login-nginx:		;	docker exec -it nginx bash
 login-wp:			;	docker exec -it wordpress bash
+login_redis:		;	docker exec -it redis bash
+login_vsftpd:		;	docker exec -it vsftpd bash
 
-clean:				;	docker system prune -a
-						docker volume rm $(docker volume ls -q --filter dangling=true)
-						rm -rf ./srcs/data/db/*
-						rm -rf ./srcs/data/wordpress/*
+clean: stop_down
+						docker system prune -a
+						rm -rf ./srcs/data
 
 ls-volume:			;	docker volume ls
 ls-container:		;	docker container ls -a
