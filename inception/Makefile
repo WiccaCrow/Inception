@@ -13,7 +13,7 @@ all: dir_create build up
 dir_create:			;	mkdir -p /home/mdulcie/data/db
 						mkdir -p /home/mdulcie/data/wordpress
 						cp -r ./srcs/requirements/mysite /home/mdulcie/data/mysite
-						chmod -R 777 /home/mdulcie/data/
+						sudo chmod -R 777 /home/mdulcie/data/
 # build:				;	docker-compose -f ./srcs/docker-compose.yml build --no-cache
 build:				;	docker-compose -f ./srcs/docker-compose.yml build
 up:					;	docker-compose -f ./srcs/docker-compose.yml up
