@@ -37,6 +37,7 @@ login_vsftpd:		;	docker exec -it vsftpd bash
 
 clean: stop_down
 						docker system prune -a
+						docker volume rm db resume wordpress1 
 						rm -rf ./srcs/data
 
 ls-volume:			;	docker volume ls

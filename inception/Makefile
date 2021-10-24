@@ -12,7 +12,7 @@ all: dir_create build up
 
 dir_create:			;	mkdir -p /home/mdulcie/data/db
 						mkdir -p /home/mdulcie/data/wordpress
-						cp -r ./srcs/requirements/mysite ./home/mdulcie/data/mysite
+						cp -r ./srcs/requirements/mysite /home/mdulcie/data/mysite
 						chmod -R 777 /home/mdulcie/data/
 # build:				;	docker-compose -f ./srcs/docker-compose.yml build --no-cache
 build:				;	docker-compose -f ./srcs/docker-compose.yml build
@@ -37,7 +37,8 @@ login_vsftpd:		;	docker exec -it vsftpd bash
 
 clean: stop_down
 						docker system prune -a
-						rm -rf ./srcs/data
+						sudo rm -rf /home/mdulcie/data
+						docker volume rm db resume wordpress1 
 
 ls-volume:			;	docker volume ls
 ls-container:		;	docker container ls -a
