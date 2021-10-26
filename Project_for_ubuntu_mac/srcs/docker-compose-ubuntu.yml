@@ -1,0 +1,113 @@
+# version: "3.9"
+version: "3.6"
+services:
+  mariadb:
+    build: ./requirements/mariadb/
+    image: mariadb
+    container_name: mariadb
+    restart: on-failure
+    env_file:
+      - mac.env
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - vikka
+  nginx:
+    build: ./requirements/nginx/
+    image: nginx
+    container_name: nginx
+    ports:
+      - 443:443
+    restart: on-failure
+    networks:
+      - vikka
+    volumes:
+      - wordpress:/var/www/html/wordpress
+      - resume:/var/www/html/resume
+    depends_on:
+      - wordpress
+  wordpress:
+    build: ./requirements/wordpress/
+    image: wordpress
+    container_name: wordpress
+    env_file:
+      - mac.env
+    restart: on-failure
+    networks:
+      - vikka
+    volumes:
+      - wordpress:/var/www/html/wordpress
+    depends_on:
+      - mariadb
+  redis:
+    build: ./requirements/redis/
+    image: redis
+    container_name: redis
+    restart: on-failure
+    networks:
+      - vikka
+    depends_on:
+      - wordpress
+  vsftpd:
+    build: ./requirements/vsftpd/
+    image: vsftpd
+    container_name: vsftpd
+    ports:
+      - 21:21
+    restart: on-failure
+    volumes:
+      - wordpress:/home/vsftpdusers/for_ftp_serv
+    networks:
+      - vikka
+    depends_on:
+      - wordpress
+    env_file:
+      - ftp_serv.env
+  adminer:
+    build: ./requirements/adminer/
+    image: adminer
+    container_name: adminer
+    restart: on-failure
+    networks:
+      - vikka
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - nginx
+  # phpmyadmin:
+  #   image: phpmyadmin
+  #   # restart: always
+  #   restart: on-failure
+  #   networks:
+  #     - vikka
+  #   ports:
+  #     - 8080:80
+  #   environment:
+  #     - PMA_ARBITRARY=1
+
+networks:
+  vikka:
+    driver: bridge
+
+volumes:
+    db:
+      name: db
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /home/user/Desktop/github/Inception/Project_for_ubuntu_mac/srcs/data/db
+    wordpress:
+      name: wordpress1
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /home/user/Desktop/github/Inception/Project_for_ubuntu_mac/srcs/data/wordpress
+    resume:
+      name: resume
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /home/user/Desktop/github/Inception/Project_for_ubuntu_mac/srcs/requirements/mysite

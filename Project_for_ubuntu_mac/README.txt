@@ -1,0 +1,1 @@
+Для запуска проекта, необходимо заменить открыть файл docker-compose-mac/ubuntu.yml в папке srcs и внизу в файле в строках "device: /home/user/Desktop/github/(продолжение пути до папки)" заменить часть "/home/user/Desktop/github/" на путь на Вашей машине до проекта Inception.
