@@ -47,8 +47,8 @@ ____________________________________________
 
   3.1. Project_for_VirtBox. В папке есть инструкция readme.
 
-  Project for Ubuntu_20.04 (on VM).
-  You need to edit the file /etc/hosts, replace localhost to mdulcie.42.fr
+    Project for Ubuntu_20.04 (on VM).
+    You need to edit the file /etc/hosts, replace localhost to mdulcie.42.fr
     
   Исполнение данной инструкции необходимо для того, чтобы в браузере можно было ввести в адресную строку mdulcie.42.fr.
   Также можно все это проделать и без установки виртуальной машины, просто не забудьте поменять в файле /etc/hosts, обратно на localhost текст mdulcie.42.fr
