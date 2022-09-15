@@ -10,12 +10,13 @@ THIS_FILE := $(lastword $(MAKEFILE_LIST))
 # Collect an image from docker-compose.yml
 # all: build up
 all: dir_create build up
+nocache: dir_create build_nocache up
 
 dir_create:			;	mkdir -p ./srcs/data/db
 						mkdir -p ./srcs/data/wordpress
 						chmod -R 777 ./srcs/data/
 
-# build:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml build --no-cache
+build_nocache:		;	docker-compose -f ./srcs/docker-compose-ubuntu.yml build --no-cache
 build:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml build
 up:					;	docker-compose -f ./srcs/docker-compose-ubuntu.yml up
 start:				;	docker-compose -f ./srcs/docker-compose-ubuntu.yml start
