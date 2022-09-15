@@ -26,6 +26,7 @@ services:
       - resume:/var/www/html/resume
     depends_on:
       - wordpress
+      - adminer
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress
@@ -63,6 +64,7 @@ services:
       - wordpress
     env_file:
       - ftp_serv.env
+    tty: true
   adminer:
     build: ./requirements/adminer/
     image: adminer
@@ -73,7 +75,7 @@ services:
     volumes:
       - wordpress:/var/www/html
     depends_on:
-      - nginx
+      - mariadb
   # phpmyadmin:
   #   image: phpmyadmin
   #   # restart: always
