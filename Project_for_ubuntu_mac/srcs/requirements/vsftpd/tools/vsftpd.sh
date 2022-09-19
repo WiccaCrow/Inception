@@ -2,7 +2,6 @@
 
 # adduser vsftpduserlocal
 # список имен пользователей выводит | только нужного
-sleep 20
 sed 's/:.*//' /etc/passwd | grep $USER_NAME
 if [ 1 == $? ]; then
     mv /vsftpd.conf /etc/vsftpd.conf
