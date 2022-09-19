@@ -20,4 +20,3 @@ RUN openssl req -newkey rsa:2048 -nodes -x509 -days 3650 \
 	-subj '/C=RU/ST=Kazan/L=Kazan/O=21school/OU=42cursus/CN=mdulcie'
 
 CMD ["nginx", "-g", "daemon off;"]
-

@@ -14,18 +14,27 @@ dir_create:			;	mkdir -p ./srcs/data/db
 						mkdir -p ./srcs/data/wordpress
 						cp -r ./srcs/requirements/mysite ./srcs/data/mysite
 						chmod -R 777 ./srcs/data/
-# build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build --no-cache
-build:				;	docker-compose -f ./srcs/docker-compose-mac.yml build
-up:					;	docker-compose -f ./srcs/docker-compose-mac.yml up
-start:				;	docker-compose -f ./srcs/docker-compose-mac.yml start
-stop:				;	docker-compose -f ./srcs/docker-compose-mac.yml stop
-down:				;	docker-compose -f ./srcs/docker-compose-mac.yml down
-stop_down:			;	docker-compose -f ./srcs/docker-compose-mac.yml stop
-						docker-compose -f ./srcs/docker-compose-mac.yml down -v
+# build:				;	docker-compose -f ./srcs/docker-compose-mac.yml --env-file=./srcs/mac.env build --no-cache
+build:				;	docker-compose -f ./srcs/docker-compose-mac.yml \
+									   --env-file=./srcs/mac.env build
+up:					;	docker-compose -f ./srcs/docker-compose-mac.yml \
+									   --env-file=./srcs/mac.env up
+start:				;	docker-compose -f ./srcs/docker-compose-mac.yml \
+									   --env-file=./srcs/mac.env start
+stop:				;	docker-compose -f ./srcs/docker-compose-mac.yml \
+									   --env-file=./srcs/mac.env stop
+down:				;	docker-compose -f ./srcs/docker-compose-mac.yml \
+									   --env-file=./srcs/mac.env down
+stop_down:			;	docker-compose -f ./srcs/docker-compose-mac.yml \
+									   --env-file=./srcs/mac.env stop
+						docker-compose -f ./srcs/docker-compose-mac.yml \
+									   --env-file=./srcs/mac.env down -v
 
-logs:				;	docker-compose -f ./srcs/docker-compose-mac.yml logs --tail=100 -f
+logs:				;	docker-compose -f ./srcs/docker-compose-mac.yml \
+									   --env-file=./srcs/mac.env logs --tail=100 -f
 
-logs-api:			;	docker-compose -f ./srcs/docker-compose-mac.yml logs --tail=100 -f api
+logs-api:			;	docker-compose -f ./srcs/docker-compose-mac.yml \
+									   --env-file=./srcs/mac.env logs --tail=100 -f api
 
 ps:					;	docker ps
 

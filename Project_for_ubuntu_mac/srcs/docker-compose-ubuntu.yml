@@ -12,6 +12,12 @@ services:
       - db:/var/lib/mysql
     networks:
       - vikka
+    healthcheck:
+      test: ["CMD", "mysql", "-u${DB_USER_ADMIN}", "-p${DB_PASSWORD_ADMIN}"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
   nginx:
     build: ./requirements/nginx/
     image: nginx
@@ -25,8 +31,10 @@ services:
       - wordpress:/var/www/html/wordpress
       - resume:/var/www/html/resume
     depends_on:
-      - wordpress
-      - adminer
+      wordpress:
+        condition: service_started
+      adminer:
+        condition: service_started
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress
@@ -39,7 +47,8 @@ services:
     volumes:
       - wordpress:/var/www/html/wordpress
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
   redis:
     build: ./requirements/redis/
     image: redis
@@ -48,7 +57,8 @@ services:
     networks:
       - vikka
     depends_on:
-      - wordpress
+      wordpress:
+        condition: service_started
   vsftpd:
     build: ./requirements/vsftpd/
     image: vsftpd
@@ -61,10 +71,10 @@ services:
     networks:
       - vikka
     depends_on:
-      - wordpress
+      wordpress:
+        condition: service_started
     env_file:
       - ftp_serv.env
-    tty: true
   adminer:
     build: ./requirements/adminer/
     image: adminer
@@ -75,7 +85,10 @@ services:
     volumes:
       - wordpress:/var/www/html
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
+  # alpine:
+  #   build: ./requirements/alpine/
   # phpmyadmin:
   #   image: phpmyadmin
   #   # restart: always
