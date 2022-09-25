@@ -1,0 +1,142 @@
+version: "3.9"
+services:
+  adminer:
+    build: ./requirements/adminer/
+    image: adminer
+    container_name: adminer
+    restart: on-failure
+    networks:
+      - vikka
+    volumes:
+      - adminer:/var/www/html
+    depends_on:
+      mariadb_debian:
+        condition: service_healthy
+  mariadb_debian:
+    build: ./requirements/mariadb_debian/
+    image: mariadb
+    container_name: mariadb
+    restart: on-failure
+    env_file:
+      - ${FILE_ENV}
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - vikka
+    healthcheck:
+      test: ["CMD", "mysql", "-u${DB_USER_ADMIN}", "-p${DB_PASSWORD_ADMIN}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+  # nginx_debian:
+  #   build: ./requirements/nginx_debian/
+  nginx_alpine:
+    build: ./requirements/nginx_alpine/
+    image: nginx
+    container_name: nginx
+    ports:
+      - 443:443
+    restart: on-failure
+    env_file:
+      - ${FILE_ENV}
+    networks:
+      - vikka
+    volumes:
+      - wordpress:/var/www/html/wordpress
+      - resume:/var/www/html/resume
+    depends_on:
+      # wordpress_alpine:
+      wordpress_debian:
+        condition: service_started
+      adminer:
+        condition: service_started
+  redis:
+    build: ./requirements/redis/
+    image: redis
+    container_name: redis
+    restart: on-failure
+    networks:
+      - vikka
+    depends_on:
+      wordpress_debian:
+      # wordpress_alpine:
+        condition: service_started
+  vsftpd:
+    build: ./requirements/vsftpd/
+    image: vsftpd
+    container_name: vsftpd
+    ports:
+      - 21:21
+    restart: on-failure
+    volumes:
+      - wordpress:/home/vsftpdusers/for_ftp_serv
+    networks:
+      - vikka
+    depends_on:
+      # wordpress_alpine:
+      wordpress_debian:
+        condition: service_started
+    env_file:
+      - ftp_serv.env
+  wordpress_debian:
+    build: ./requirements/wordpress_debian/
+  # wordpress_alpine:
+    # build: ./requirements/wordpress_alpine/
+    image: wordpress
+    container_name: wordpress
+    env_file:
+      - ${FILE_ENV}
+    restart: on-failure
+    networks:
+      - vikka
+    volumes:
+      - wordpress:/var/www/html/wordpress
+    depends_on:
+      mariadb_debian:
+        condition: service_healthy
+        # condition: service_started
+  # phpmyadmin:
+  #   image: phpmyadmin
+  #   # restart: always
+  #   restart: on-failure
+  #   networks:
+  #     - vikka
+  #   ports:
+  #     - 8080:80
+  #   environment:
+  #     - PMA_ARBITRARY=1
+
+networks:
+  vikka:
+    driver: bridge
+
+volumes:
+    db:
+      name: db
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: ${DB_DEVICE}
+    wordpress:
+      name: wordpress1
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: ${WP_DEVICE}
+    resume:
+      name: resume
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: ${RESUME_DEVICE}
+    adminer:
+      name: adminer
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: ${ADM_DEVICE}

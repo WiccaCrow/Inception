@@ -1,0 +1,51 @@
+ENV					=	./srcs/VB.env
+DOCKER_COMPOSE_YML	=	./srcs/docker-compose.yml
+DOCKER_COMPOSE		=	docker-compose --env-file=$(ENV) -f $(DOCKER_COMPOSE_YML)
+
+.PHONY: help build up start down destroy stop restart logs logs-api ps login-timescale login-api db-shell
+
+all: dir_create build up
+nocache: dir_create build_nocache up
+
+dir_create:			;	mkdir -p ./srcs/data/db			;
+						mkdir -p ./srcs/data/wordpress	;
+						mkdir -p ./srcs/data/adminer	;
+						chmod -R 777 ./srcs/data/
+
+build_nocache:		;	$(DOCKER_COMPOSE) build --no-cache
+build:				;	$(DOCKER_COMPOSE) build
+up:					;	$(DOCKER_COMPOSE) up
+start:				;	$(DOCKER_COMPOSE) start
+stop:				;	$(DOCKER_COMPOSE) stop
+down:				;	$(DOCKER_COMPOSE) down -v
+stop_down: stop down
+
+logs:				;	$(DOCKER_COMPOSE) logs --tail=100 -f
+logs-api:			;	$(DOCKER_COMPOSE) logs --tail=100 -f api
+
+ps:					;	$(DOCKER_COMPOSE) ps
+
+login_mdb:			;	docker exec -it mariadb bash
+login_nginx:		;	docker exec -it nginx bash
+login_wp:			;	docker exec -it wordpress bash
+login_redis:		;	docker exec -it redis bash
+login_vsftpd:		;	docker exec -it vsftpd bash
+
+clean:				;	docker system prune -a
+						sudo rm -rf ./srcs/data
+						docker volume rm $(docker volume ls -q --filter dangling=true)
+						# docker volume rm adminer db resume wordpress1 
+						# docker-compose -f $(DOCKER_COMPOSE) rm
+
+ls_volume:			;	docker volume    ls
+ls_container:		;	docker container ls -a
+ls_network:			;	docker network   ls
+ls_image:			;	docker image     ls
+
+re: clean all
+
+#  https://www.gnu.org/software/make/manual/make.pdf
+#  https://www.gnu.org/software/make/manual/
+# Commands available for make:
+#  https://question-it.com/questions/4885548/kak-poluchit-spisok-tselej-v-make-fajle
+#  https://habr.com/ru/company/ruvds/blog/486682/
